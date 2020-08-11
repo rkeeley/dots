@@ -174,12 +174,11 @@ let g:vc_browse_cache_all = 1   " caching for repo/working copy/bookmarks
 " YouCompleteMe config
 "
 let g:ycm_collect_identifiers_from_tags = 1
-let g:ycm_min_num_of_chars_for_completion = 3 " sick of having to esc twice
+let g:ycm_min_num_of_chars_for_completion = 3 " sick of having to esc twice 
 " TODO: Explain this somewhere else
 " Need a ~/.vimrc/after/plugin/youcompleteme.vim to edit ycm vars after init
 "let g:ycm_filetype_blacklist.diff = 0
-" FIXME:
-"set tags += expand('$HOME')
+set tags+=$HOME/.vimrc/tags/*
 
 
 "
