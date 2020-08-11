@@ -16,11 +16,11 @@ Plugin 'VundleVim/Vundle.vim'               " let Vundle manage Vundle
 
 " Utilities
 Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy find: :CtrlP*
+Plugin 'jeetsukumaran/vim-buffergator'      " easier buffer management: \b
 Plugin 'majutsushi/tagbar'                  " tags in sidebar: <F8>
+Plugin 'mattn/vim-sqlfmt'                   " fotmat SQL: :SQLFmt
 Plugin 'scrooloose/nerdtree'                " file explorer: <F10>
 Plugin 'vim-scripts/BufOnly.vim'            " close all other buffers: :BufOnly
-Plugin 'mattn/vim-sqlfmt'                   " fotmat SQL: :SQLFmt
-Plugin 'jeetsukumaran/vim-buffergator'      " easier buffer management: \b
 Plugin 'wesQ3/vim-windowswap'               " easy window swapping: \ww
 
 " Programming Support
@@ -71,12 +71,12 @@ set showmatch                          " highlight matching brace
 set wildmenu                           " visual completion bar above cmd line
 set wildmode=list:longest              " list all matches; complete longest str
 syntax on                              " enable syntax highlighting if possible
+colorscheme murphy                     " TODO: get better ones/gruvbox/base16
 
 " Text file or no extension (assume notes file) -> break lines at textwidth
 if &filetype ==# "text" || strlen(&filetype) == 0
     set linebreak
 endif
-colorscheme murphy                     " TODO: get better ones/gruvbox/base16
 
 
 "
@@ -88,6 +88,7 @@ set expandtab                          " tabs -> spaces
 set foldmethod=syntax                  " fold based on filetype syntax
 set formatoptions-=o                   " don't start line with comment with [oO]
 set formatoptions+=j                   " smart join commented lines
+set hidden                             " switch buffers without saving first
 set hlsearch                           " highlight all search results
 set ignorecase                         " always case-insensitive (until caps)
 set incsearch                          " incremental search
@@ -118,6 +119,7 @@ set noerrorbells                       " >:(
 "
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "autocmd FileType sh set formatoptions+=o " no block comment syntax in sh
+autocmd BufNewFile,BufReadPost *.sh setlocal textwidth=80
 
 
 "
@@ -164,8 +166,20 @@ let g:NERDTreeWindowPos           = 'left'
 let g:vc_log_name         = '/tmp/vc.vim.log'
 let g:vc_max_logs         = 15  " default number of logs to pull per revision
 let g:vc_max_open_files   = 10  " max # of files to open with :VCBrowse <C-o>
-let g:vc_no_vc_maps = 1         " stop remapping my + after vimrc is loaded
+let g:vc_no_vc_maps       = 1   " stop remapping my + after vimrc is loaded
 let g:vc_browse_cache_all = 1   " caching for repo/working copy/bookmarks
+
+
+"
+" YouCompleteMe config
+"
+let g:ycm_collect_identifiers_from_tags = 1
+let g:ycm_min_num_of_chars_for_completion = 3 " sick of having to esc twice
+" TODO: Explain this somewhere else
+" Need a ~/.vimrc/after/plugin/youcompleteme.vim to edit ycm vars after init
+"let g:ycm_filetype_blacklist.diff = 0
+" FIXME:
+"set tags += expand('$HOME')
 
 
 "
